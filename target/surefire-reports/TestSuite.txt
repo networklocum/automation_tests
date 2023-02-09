@@ -1,0 +1,87 @@
+-------------------------------------------------------------------------------
+Test set: TestSuite
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 2, Errors: 0, Skipped: 1, Time elapsed: 21.595 s <<< FAILURE! - in TestSuite
+lantum.Rota.RotaTests.LoadSettings  Time elapsed: 0.356 s  <<< FAILURE!
+java.lang.RuntimeException: An error occurred while loading selenium.properties
+	at Framework.Configuration.ConfigProvider.<init>(ConfigProvider.java:36)
+	at Framework.Configuration.Settings.loadSettings(Settings.java:30)
+	at Framework.Configuration.Settings.<init>(Settings.java:23)
+	at lantum.Rota.RotaTests.LoadSettings(RotaTests.java:14)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:361)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:296)
+	at org.testng.internal.invokers.TestMethodWorker.invokeBeforeClassMethods(TestMethodWorker.java:180)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:122)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at Framework.Configuration.ConfigProvider.<init>(ConfigProvider.java:34)
+	... 16 more
+
+Tests.AndTest  Time elapsed: 21.219 s  <<< FAILURE!
+org.openqa.selenium.SessionNotCreatedException: 
+Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Could not find a connected Android device in 20237ms. 
+Host info: host: 'SKULIK-NB', ip: '192.168.48.1'
+Build info: version: '4.5.0', revision: 'fe167b119a'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.5'
+Driver info: io.appium.java_client.android.AndroidDriver
+Command: [null, newSession {capabilities=[{appium:appActivity=com.lantum.app.MainActivity, platformName=ANDROID, appium:automationName=UIAutomator2, appium:appPackage=com.lantum.staging.app}], desiredCapabilities=Capabilities {appium:appActivity: com.lantum.app.MainActivity, appium:appPackage: com.lantum.staging.app, appium:automationName: UIAutomator2, platformName: ANDROID}}]
+Capabilities {}
+	at org.openqa.selenium.remote.ProtocolHandshake.createSession(ProtocolHandshake.java:144)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at io.appium.java_client.remote.AppiumProtocolHandshake.createSession(AppiumProtocolHandshake.java:126)
+	at io.appium.java_client.remote.AppiumProtocolHandshake.createSession(AppiumProtocolHandshake.java:102)
+	at io.appium.java_client.remote.AppiumCommandExecutor.createSession(AppiumCommandExecutor.java:194)
+	at io.appium.java_client.remote.AppiumCommandExecutor.execute(AppiumCommandExecutor.java:262)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:547)
+	at io.appium.java_client.AppiumDriver.startSession(AppiumDriver.java:229)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:157)
+	at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:80)
+	at io.appium.java_client.AppiumDriver.<init>(AppiumDriver.java:92)
+	at io.appium.java_client.android.AndroidDriver.<init>(AndroidDriver.java:117)
+	at Framework.BrowserProvider.createDriver(BrowserProvider.java:27)
+	at com.codeborne.selenide.webdriver.DefaultDriverFactory.createInstanceOf(DefaultDriverFactory.java:40)
+	at com.codeborne.selenide.webdriver.DefaultDriverFactory.create(DefaultDriverFactory.java:29)
+	at com.codeborne.selenide.webdriver.WebDriverFactory.createWebDriverInstance(WebDriverFactory.java:119)
+	at com.codeborne.selenide.webdriver.WebDriverFactory.createWebDriver(WebDriverFactory.java:67)
+	at com.codeborne.selenide.drivercommands.CreateDriverCommand.lambda$createDriver$0(CreateDriverCommand.java:76)
+	at com.codeborne.selenide.logevents.SelenideLogger.get(SelenideLogger.java:166)
+	at com.codeborne.selenide.drivercommands.CreateDriverCommand.createDriver(CreateDriverCommand.java:52)
+	at com.codeborne.selenide.impl.WebDriverThreadLocalContainer.createDriver(WebDriverThreadLocalContainer.java:180)
+	at com.codeborne.selenide.impl.WebDriverThreadLocalContainer.getAndCheckWebDriver(WebDriverThreadLocalContainer.java:149)
+	at com.codeborne.selenide.WebDriverRunner.getAndCheckWebDriver(WebDriverRunner.java:130)
+	at com.codeborne.selenide.impl.StaticDriver.getAndCheckWebDriver(StaticDriver.java:65)
+	at com.codeborne.selenide.SelenideDriver.getAndCheckWebDriver(SelenideDriver.java:220)
+	at com.codeborne.selenide.logevents.SelenideLogger.run(SelenideLogger.java:153)
+	at com.codeborne.selenide.drivercommands.Navigator.open(Navigator.java:89)
+	at com.codeborne.selenide.SelenideDriver.open(SelenideDriver.java:97)
+	at com.codeborne.selenide.Selenide.open(Selenide.java:128)
+	at Tests.AndTest(Tests.java:25)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+

@@ -1,0 +1,9 @@
+Framework\Configuration\BrowserType.class
+Framework\Configuration\UnknownBrowserException.class
+Framework\User.class
+Framework\Configuration\Settings.class
+Framework\Selenium\BasePage.class
+Framework\BrowserProvider.class
+Framework\Logger.class
+Framework\Configuration\Environment.class
+Framework\Configuration\ConfigProvider.class

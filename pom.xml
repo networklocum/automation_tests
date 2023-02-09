@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.lantum</groupId>
+    <artifactId>TestAutomation</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <thread.count>1</thread.count>
+        <environemnt.properties>environment.properties</environemnt.properties>
+        <project>Rota</project>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide-appium -->
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide-appium</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>app.getxray</groupId>
+            <artifactId>xray-maven-plugin</artifactId>
+            <version>0.7.0</version>
+            <scope>test</scope>
+          <!--  <configuration>
+                <clientId>215FFD69FE46447280000000000</clientId>
+                <clientSecret>1c00f8f22f56a8684d7c18cd61470000000</clientSecret>
+                <cloud>true</cloud>
+                <projectKey>CALC</projectKey>
+                <fixVersion>1.0</fixVersion>
+                <reportFormat>testng</reportFormat>
+                <reportFile>target/testng-results.xml</reportFile>
+            </configuration>-->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>xpandit</id>
+            <name>xpand-releases</name>
+            <url>http://maven.xpand-it.com/artifactory/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>1.18.24</version>
+                                </path>
+                            </annotationProcessorPaths>
+                            <showDeprecation>true</showDeprecation>
+                            <showWarnings>true</showWarnings>
+                            <compilerArguments>
+                                <source>${maven.compiler.target}</source>
+                                <target>${maven.compiler.source}</target>
+                            </compilerArguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <configuration>
+                            <showDeprecation>true</showDeprecation>
+                            <showWarnings>true</showWarnings>
+                            <compilerArguments>
+                                <source>${maven.compiler.target}</source>
+                                <target>${maven.compiler.target}</target>
+                                <encoding>UTF-8</encoding>
+                            </compilerArguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>${thread.count}</threadCount>
+                    <properties>
+                        <!-- Setting ReportNG listeners -->
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>false</value>
+                        </property>
+                        <property>
+                            <name>reporter</name>
+                            <value>org.testng.reporters.XMLReporter:generateTestResultAttributes=true,generateGroupsAttribute=true</value>
+                        </property>
+                    </properties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- This profile will run the selenium tests -->
+        <profile>
+            <id>selenium</id>
+            <activation>
+                <property>
+                    <name>project</name>
+                </property>
+            </activation>
+            <properties>
+                <browser>chrome</browser>
+                <!-- Default Browser. Should be set using -Dbrowser= -->
+            </properties>
+            <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                    </testResource>
+                    <testResource>
+                        <directory>src/config/${project}</directory>
+                        <filtering>true</filtering>
+                    </testResource>
+                </testResources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <parallel>methods</parallel>
+                            <threadCount>${thread.count}</threadCount>
+                            <includes>
+                                <include>**/${project}/**/*lantum.Swaps.SwapsTests.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
+</project>
