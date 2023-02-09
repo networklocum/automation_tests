@@ -43,7 +43,7 @@ public class ConfigProvider {
         port = getConfigParameter("selenium.grid.port", "4444");
         device = getConfigParameter("device", "Nexus 6");
         project = getConfigParameter("project", "Rota");
-        environment = getConfigParameter("environment", "stage");
+        environment = getConfigParameter("env", "stage");
         browser = getConfigParameter("selenium.browser");
         headerAuth = getConfigParameter("header.auth", "");
         mainUser = getConfigParameter("main.user", "Framework.User");
